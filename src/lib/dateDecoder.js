@@ -5,10 +5,13 @@ export const dateDecoder = (unixDate) => {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
+        
     };
-
-    const milliseconds = unixDate * 1000;
+    let date = '';
+    const milliseconds = unixDate;
     const dateObject = new Date(milliseconds);
-    return dateObject.toLocaleDateString('es', options)
+    date = dateObject.toLocaleDateString('es', options);
+    date += (". "+dateObject.getHours()+":"+dateObject.getMinutes());
+    return date;
 
 }
