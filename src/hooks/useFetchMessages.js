@@ -4,19 +4,18 @@ import { useEffect, useState } from 'react';
 
 export const useFetchMessages = () => {
 
-    const [state, setState] = useState({
-        data:[]
-    });
+    const [state, setState] = useState();
 
     useEffect(() => {
         fetchMessages()
             .then( info =>{
-                setState({
-                    data: info.data
-                })
+                console.log(info)
+                setState(info)
             })
-       
-    },)
+            .catch( err => {
+              console.error(`Error presentado: ${err}`)
+            })  
+    }, [])
 
     return state;
 };
