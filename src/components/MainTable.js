@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table'
 import { fetchMessages } from '../api/fetchMessages';
-import { useFetchMessages } from '../hooks/useFetchMessages';
 import { TableRow } from './TableRow';
 
 const MainTable = () => {
 
-   const llamarApi = async () => { 
-     await fetchMessages();
-   }
-    useEffect(() => {
-      llamarApi();
-    }, [])
+  const [data, setData] = useState([]);
+  const loadData = async () =>{
+    const newData = await fetchMessages();
+    setData(newData);
+  }
+  useEffect(() => {
+    loadData();
+  }, [])
 
 
     return (
@@ -25,14 +26,14 @@ const MainTable = () => {
             </tr>
             </thead>
             <tbody>
-            {/* {
+            {
                 data.map((info) => {
                     return <TableRow
                         key = {info.time}
                         {...info} 
                     />
                 })
-            } */}
+            }
             
             </tbody>
         </Table>             

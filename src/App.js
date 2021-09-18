@@ -5,9 +5,6 @@ import MainTable from "./components/MainTable";
 import Button from 'react-bootstrap/Button'
 
 const App = () => {
-    // useEffect(() => {
-    //     fetchMessages().then((data) => console.log(data))
-    // }, [])
     return (
         <>
             <Navigation/>
