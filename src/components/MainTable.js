@@ -3,12 +3,19 @@ import Table from 'react-bootstrap/Table'
 import { fetchMessages } from '../api/fetchMessages';
 import { TableRow } from './TableRow';
 
-const MainTable = () => {
+const MainTable = ({option, page, setPages}) => {
 
   const [data, setData] = useState([]);
   const loadData = async () =>{
-    const newData = await fetchMessages();
-    setData(newData);
+    let query = option;
+    if(page){
+      query += `?page=${page}`;
+    }
+    const data = await fetchMessages(query);
+    setData(data.messages);
+    if(page){
+      setPages(data.totalPages)
+    }
   }
   useEffect(() => {
     loadData();
