@@ -3,23 +3,23 @@ import Table from 'react-bootstrap/Table'
 import { fetchMessages } from '../api/fetchMessages';
 import { TableRow } from './TableRow';
 
-const MainTable = ({option, page, setPages}) => {
+const MainTable = ({data}) => {
 
-  const [data, setData] = useState([]);
-  const loadData = async () =>{
-    let query = option;
-    if(page){
-      query += `?page=${page}`;
-    }
-    const data = await fetchMessages(query);
-    setData(data.messages);
-    if(page){
-      setPages(data.totalPages)
-    }
-  }
-  useEffect(() => {
-    loadData();
-  }, [])
+  // const [data, setData] = useState([]);
+  // const loadData = async () =>{
+  //   let query = option;
+  //   if(page){
+  //     query += `?page=${page}`;
+  //   }
+  //   const data = await fetchMessages(query);
+  //   setData(data.messages);
+  //   if(page){
+  //     setPages(data.totalPages)
+  //   }
+  // }
+  // useEffect(() => {
+  //   loadData();
+  // }, [])
 
 
     return (

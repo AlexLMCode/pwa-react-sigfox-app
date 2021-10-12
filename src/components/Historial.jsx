@@ -1,22 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Pagination from "react-js-pagination";
 
 import MainTable from './MainTable'
 
+import { fetchMessages } from '../api/fetchMessages';
+
 const Historial = () => {
-  const [pages, setPages] = useState('');
+  const [elements, setElements] = useState('');
   const [actualPage, setActualPage] = useState(1);
+  const [data, setData] = useState([]);
+  const loadData = async () =>{
+    let query = `allMensajes?page=${actualPage}`;
+    const data = await fetchMessages(query);
+    setData(data.messages);
+    setElements(data.totalElements);
+  }
+  useEffect(() => {
+    loadData();
+  }, [actualPage])
   return (
     <div>
-      <MainTable option="allMensajes" page={actualPage} setPages={setPages} />
+      <MainTable data={data}/>
       <Pagination
         activePage={actualPage}
-        itemsCountPerPage={10}
-        totalItemsCount={pages}
-        pageRangeDisplayed={5}
+        totalItemsCount={elements}
+        itemsCountPerPage={50}
+        pageRangeDisplayed={10}
         onChange={async(e)=>{
           await setActualPage(e);
-          console.log(actualPage)
         }}
       />
     </div>
